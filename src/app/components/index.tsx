@@ -1,1 +1,3 @@
-import { Sidebar } from './Sidebar';
+/** @format */
+
+export { Sidebar } from './Sidebar';
