@@ -1,10 +1,22 @@
-import type { NextConfig } from "next";
+/** @format */
+
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
 	/* config options here */
-  //para imagenes remotas
+	//para imagenes remotas
 	images: {
-		remotePatterns: [new URL('https://images.unsplash.com/*')],
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'images.unsplash.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'raw.githubusercontent.com',
+			},
+			// new URL('https://images.unsplash.com/*'),
+		],
 	},
 };
 

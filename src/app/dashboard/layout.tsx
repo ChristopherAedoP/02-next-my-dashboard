@@ -1,7 +1,7 @@
 
 /** @format */
 
-import { Sidebar } from "../components";
+import { Sidebar } from "@/components";
 
 
 
