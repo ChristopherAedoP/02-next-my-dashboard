@@ -1,30 +1,36 @@
 /** @format */
 
-import { Pokemon } from '@/pokemons';
+import { Pokemon, PokemonsResponse } from '@/pokemons';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 /** @format */
 
 interface Props {
-	params: Promise<{ id: string }>;
+	params: Promise<{ name: string }>;
 }
 
 //Esto Solo se ejecuta en build time.
 export async function generateStaticParams() {
-	const static151Pokemons = Array.from({ length: 151 }).map(
-		(v, i) => `${i + 1}`
-	);
+	// const static151Pokemons = Array.from({ length: 151 }).map(
+	// 	(v, i) => `${i + 1}`
+	// );
 
-	return static151Pokemons.map((id) => ({
-		id: id,
+	const data: PokemonsResponse = await fetch(
+		`https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`
+	).then((res) => res.json());
+
+	const static151Pokemons = data.results.map((pokemon) => ({
+		name: pokemon.name,
 	}));
+
+	return static151Pokemons;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { id } = await params;
+	const { name } = await params;
 
-	const pokemon = await getPokemon(id);
+	const pokemon = await getPokemonByName(name);
 
 	return {
 		title: `#${pokemon.id} - ${pokemon.name}`,
@@ -32,9 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	};
 }
 
-const getPokemon = async (id: string): Promise<Pokemon> => {
+const getPokemonByName = async (name: string): Promise<Pokemon> => {
 	try {
-		const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
+		const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
 			cache: 'force-cache',
 		}).then((resp) => resp.json());
 
@@ -48,8 +54,8 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
 };
 
 export default async function PokemonPage({ params }: Props) {
-	const { id } = await params;
-	const pokemon = await getPokemon(id);
+	const { name } = await params;
+	const pokemon = await getPokemonByName(name);
 
 	return (
 		<div className="flex mt-5 flex-col items-center text-slate-800">
