@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { FiHexagon } from 'react-icons/fi';
 import { SidebarMenuItems } from './SidebarMenuItems';
-import { IoBrowsersOutline, IoCalculator, IoGameControllerOutline } from 'react-icons/io5';
+import { IoBrowsersOutline, IoCalculator, IoGameControllerOutline, IoHeartOutline } from 'react-icons/io5';
 
 const menuItems = [
 	{
@@ -23,6 +23,12 @@ const menuItems = [
 		icon: <IoGameControllerOutline size={35} />,
 		title: 'Pokemons',
 		subTitle: 'Generacion Estatica',
+	},
+	{
+		path: '/dashboard/favorites',
+		icon: <IoHeartOutline size={35} className='text-red-500' />,
+		title: 'Favoritos',
+		subTitle: 'Global State',
 	},
 ];
 

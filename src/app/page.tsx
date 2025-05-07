@@ -4,10 +4,10 @@ export default function HomePage() {
 
 
   redirect('/dashboard/main')
-  return (
-    <>
+  // return (
+  //   <>
     
-    <h1>Hola mundo    </h1>
-    </>
-  );
+  //   <h1>Hola mundo    </h1>
+  //   </>
+  // );
 }
