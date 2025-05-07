@@ -1,6 +1,6 @@
 /** @format */
 
-import { PokemonGrid } from '@/pokemons';
+import { PokemonsFavorites } from '@/pokemons';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,19 +8,18 @@ export const metadata: Metadata = {
 	description: 'lista de pokemons',
 };
 
-
-
-export default async function PokemosPage() {
-
+export default async function PokemonsFavoritesPage() {
 	return (
 		<div className="flex flex-col">
 			<span className="text-5xl my-2">
 				Pokémons Favoritos <small className="text-blue-500">Global state</small>
 			</span>
 
-			<PokemonGrid pokemons={ [] } />
+			<PokemonsFavorites />
 
-			{/* {JSON.stringify(pokemons)} */}
+			
 		</div>
 	);
 }
+
+
